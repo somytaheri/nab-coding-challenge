@@ -7,7 +7,7 @@ import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 
-import { formatDate, formatAMPM } from "../../utilities/dateFormatter";
+import { formatDate, formatAMPM } from "../../utilities/timeFormatter";
 
 const DataTable = props => {
   const useStyles = makeStyles(theme => ({

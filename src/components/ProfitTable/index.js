@@ -7,7 +7,7 @@ import Avatar from "@material-ui/core/Avatar";
 import { red } from "@material-ui/core/colors";
 import Divider from "@material-ui/core/Divider";
 
-import { formatDate, formatAMPM } from "../../utilities/dateFormatter";
+import { formatDate, formatAMPM } from "../../utilities/timeFormatter";
 
 const useStyles = makeStyles(theme => ({
   root: {
