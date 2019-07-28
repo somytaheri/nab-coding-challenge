@@ -10,7 +10,7 @@ I used following tools and technologies:
 - Axios
 - Material UI
 
-As the data is pass down only one level, I decided not to use redux for this project.
+As the data has been passed down only one level, I decided not to use redux for this project.
 
 ### Assumptions
 
