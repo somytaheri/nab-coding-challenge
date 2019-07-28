@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 import formatDate from "../../utilities/dateFormatter";
 
@@ -27,5 +28,10 @@ class DataTable extends React.Component {
     );
   }
 }
+
+DataTable.propTypes = {
+  handleProfitCalculate: PropTypes.func,
+  data: PropTypes.array
+};
 
 export default DataTable;
