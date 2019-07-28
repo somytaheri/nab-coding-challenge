@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { makeStyles } from "@material-ui/core/styles";
+import { withStyles, makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
@@ -18,55 +18,50 @@ const DataTable = props => {
       boxShadow: "none"
     },
     table: {
-      maxWidth: 650
+      width: "100%"
     }
   }));
 
   const classes = useStyles();
+  const StyledTableCell = withStyles(theme => ({
+    head: {
+      backgroundColor: theme.palette.common.black,
+      color: theme.palette.common.white
+    },
+    body: {
+      fontSize: 14
+    }
+  }))(TableCell);
+  const StyledTableRow = withStyles(theme => ({
+    root: {
+      "&:nth-of-type(odd)": {
+        backgroundColor: theme.palette.background.default
+      }
+    }
+  }))(TableRow);
   const currencies = props.data.map(item =>
     item.quotes.map(quote => (
-      <TableRow key={quote.time}>
+      <StyledTableRow key={quote.time}>
         <TableCell> {item.currency}</TableCell>
         <TableCell>{formatDate(item.date)}</TableCell>
         <TableCell>{formatAMPM(quote.time)}</TableCell>
         <TableCell>{quote.price}</TableCell>
-      </TableRow>
+      </StyledTableRow>
     ))
   );
 
-  const currencyOptions = props.data.map(item => (
-    <option key={item.currency}>{item.currency}</option>
-  ));
-
-  const dateOptions = props.data.map(item => (
-    <option key={item.date}>{formatDate(item.date)}</option>
-  ));
-
   return (
-    <div>
-      <Table className={classes.table} size="small">
-        <TableHead>
-          <TableRow>
-            <TableCell>Currency</TableCell>
-            <TableCell>Date</TableCell>
-            <TableCell>Time</TableCell>
-            <TableCell>Price</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>{currencies}</TableBody>
-      </Table>
-      <select onChange={e => props.handleProfitCalculate(e.target.value)}>
-        <option>Select a currency</option>
-        {currencyOptions}
-      </select>
-      <select onChange={e => props.handleProfitCalculate(e.target.value)}>
-        <option>Select a date</option>
-        {dateOptions}
-      </select>
-      <button onClick={props.handleProfitCalculate}>
-        Calculate best profit
-      </button>
-    </div>
+    <Table className={classes.table} size="small">
+      <TableHead>
+        <TableRow>
+          <StyledTableCell>Currency</StyledTableCell>
+          <StyledTableCell>Date</StyledTableCell>
+          <StyledTableCell>Time</StyledTableCell>
+          <StyledTableCell>Price</StyledTableCell>
+        </TableRow>
+      </TableHead>
+      <TableBody>{currencies}</TableBody>
+    </Table>
   );
 };
 

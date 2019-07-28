@@ -17,8 +17,7 @@ const useStyles = makeStyles(theme => ({
     boxShadow: "none"
   },
   card: {
-    maxWidth: 345,
-    marginBottom: "20px"
+    marginBottom: "10px"
   },
   avatar: {
     backgroundColor: red[500]
@@ -30,6 +29,10 @@ const useStyles = makeStyles(theme => ({
   divider: {
     marginTop: "5px",
     marginBottom: "10px"
+  },
+  title: {
+    fontWeight: "bold",
+    fontSize: "16px"
   }
 }));
 const DataTable = props => {
@@ -38,6 +41,9 @@ const DataTable = props => {
     return (
       <Card className={classes.card} key={item.currency} mb={2}>
         <CardHeader
+          classes={{
+            title: classes.title
+          }}
           avatar={
             <Avatar aria-label="recipe" className={classes.avatar}>
               {item.currency}
@@ -68,13 +74,14 @@ const DataTable = props => {
                     <b>Sell</b>
                   </span>
                   <span>{formatAMPM(item.highest.time)}</span>
-                  <span>{item.highest.price}</span>
+                  <span>${item.highest.price}</span>
                 </div>
               </div>
             ) : (
               <p>
-                oh no! there is no profit for today. But tomorow is another day
-                stay positive
+                Ohh no! There is no profit for today.
+                <br />
+                But tomorow is another day. Stay positive.
               </p>
             )}
           </div>
@@ -83,7 +90,7 @@ const DataTable = props => {
     );
   });
 
-  return <div>{profit}</div>;
+  return <React.Fragment>{profit}</React.Fragment>;
 };
 
 export default DataTable;
