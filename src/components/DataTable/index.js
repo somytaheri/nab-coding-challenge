@@ -6,9 +6,8 @@ import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
-import Paper from "@material-ui/core/Paper";
 
-import formatDate from "../../utilities/dateFormatter";
+import { formatDate, formatAMPM } from "../../utilities/dateFormatter";
 
 const DataTable = props => {
   const useStyles = makeStyles(theme => ({
@@ -22,17 +21,26 @@ const DataTable = props => {
       maxWidth: 650
     }
   }));
+
   const classes = useStyles();
   const currencies = props.data.map(item =>
     item.quotes.map(quote => (
       <TableRow key={quote.time}>
         <TableCell> {item.currency}</TableCell>
         <TableCell>{formatDate(item.date)}</TableCell>
-        <TableCell>{quote.time}</TableCell>
+        <TableCell>{formatAMPM(quote.time)}</TableCell>
         <TableCell>{quote.price}</TableCell>
       </TableRow>
     ))
   );
+
+  const currencyOptions = props.data.map(item => (
+    <option key={item.currency}>{item.currency}</option>
+  ));
+
+  const dateOptions = props.data.map(item => (
+    <option key={item.date}>{formatDate(item.date)}</option>
+  ));
 
   return (
     <div>
@@ -47,7 +55,14 @@ const DataTable = props => {
         </TableHead>
         <TableBody>{currencies}</TableBody>
       </Table>
-
+      <select onChange={e => props.handleProfitCalculate(e.target.value)}>
+        <option>Select a currency</option>
+        {currencyOptions}
+      </select>
+      <select onChange={e => props.handleProfitCalculate(e.target.value)}>
+        <option>Select a date</option>
+        {dateOptions}
+      </select>
       <button onClick={props.handleProfitCalculate}>
         Calculate best profit
       </button>

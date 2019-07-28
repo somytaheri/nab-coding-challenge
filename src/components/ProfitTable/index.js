@@ -4,12 +4,11 @@ import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
 import CardContent from "@material-ui/core/CardContent";
 import Avatar from "@material-ui/core/Avatar";
-import Typography from "@material-ui/core/Typography";
 import { red } from "@material-ui/core/colors";
-import Paper from "@material-ui/core/Paper";
 import Divider from "@material-ui/core/Divider";
 
-import formatDate from "../../utilities/dateFormatter";
+import { formatDate, formatAMPM } from "../../utilities/dateFormatter";
+
 const useStyles = makeStyles(theme => ({
   root: {
     width: "100%",
@@ -60,7 +59,7 @@ const DataTable = props => {
                   <span>
                     <b>Buy</b>
                   </span>
-                  <span>{item.lowest.time}</span>
+                  <span>{formatAMPM(item.lowest.time)}</span>
                   <span>${item.lowest.price}</span>
                 </div>
                 <Divider light className={classes.divider} />
@@ -68,7 +67,7 @@ const DataTable = props => {
                   <span>
                     <b>Sell</b>
                   </span>
-                  <span>{item.highest.time}</span>
+                  <span>{formatAMPM(item.highest.time)}</span>
                   <span>{item.highest.price}</span>
                 </div>
               </div>
