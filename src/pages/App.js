@@ -1,11 +1,13 @@
-import React from 'react';
+import React from "react";
 
-import Header from '../components/Header';
+import Header from "../components/Header";
+import Panel from "../components/Panel";
 
 function App() {
   return (
     <div className="App">
       <Header />
+      <Panel />
     </div>
   );
 }
